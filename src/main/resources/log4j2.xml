@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="off" strict="true" name="XMLConfigTest">
+  <Properties>
+    <Property name="project.name">springactivemqstudy</Property>
+    <Property name="filename">logs/${project.name}/${project.name}</Property>
+    <Property name="pattern">%d %-5p [%c]\: %L - %m%n</Property>
+  </Properties>
+  
+  <Appenders>
+    <Appender type="Console" name="STDOUT">
+      <Layout type="PatternLayout">
+      	<Pattern>${pattern}</Pattern>
+      </Layout>
+    </Appender>
+    <!-- 输出到文件，每天一个 -->
+    <Appender type="RollingFile" name="RollingFile" fileName="${filename}.log" filePattern="${filename}_%d{yyyy-MM-dd}.log">
+      <Layout type="PatternLayout">
+        <Pattern>${pattern}</Pattern>
+      </Layout>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+      </Policies>
+    </Appender>
+  </Appenders>
+ 
+  <Loggers>
+    <Root level="info">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="RollingFile"/>
+    </Root>
+  </Loggers>
+</Configuration>
